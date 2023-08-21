@@ -3,7 +3,7 @@
 Author:         Sergey Vlasov <sergey@vlasov.me>
 Licence:        Vim licence, see |license|
 Site:           https://github.com/noscript/elevator.vim
-Version:        0.1
+Version:        0.2
 
 ================================================================================
 CONTENTS                                                     *elevator-contents*
@@ -32,4 +32,11 @@ VARIABLES                                                   *elevator-variables*
 Example:
 >
     g:elevator#timeout_msec = 1000
+<
+
+*g:elevator#width*                    Scrollbar width.
+                                      Default value: 1
+Example:
+>
+    g:elevator#width = 2
 <

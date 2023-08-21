@@ -4,6 +4,9 @@ vim9script noclear
 if !exists('g:elevator#timeout_msec')
   g:elevator#timeout_msec = 2000
 endif
+if !exists('g:elevator#width')
+  g:elevator#width = 1
+endif
 
 var s_state = {
   scrolloff: -1,
@@ -56,12 +59,10 @@ export def Show(winid__a: number)
   if s_state.popup_id == -1
     s_state.popup_id = popup_create('', {
       pos: 'topleft',
-      minwidth: 1,
+      minwidth: g:elevator#width,
       dragall: true,
-      resize: true,
       zindex: 1,
     })
-
   endif
 
   S__set_geometry()
@@ -98,7 +99,7 @@ export def S__set_geometry()
   var popup_offset = S__clamp(((wininfo.topline - 1) * scale)->round()->float2nr(), 0, wininfo.height - popup_height)
 
   popup_setoptions(s_state.popup_id, {
-    col: wininfo.wincol + wininfo.width - 1,
+    col: wininfo.wincol + wininfo.width - g:elevator#width,
     line: wininfo.winrow + wininfo.winbar + popup_offset,
     minheight: popup_height,
   })
