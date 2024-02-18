@@ -10,6 +10,9 @@ endif
 if !exists('g:elevator#show_on_enter')
   g:elevator#width = v:false
 endif
+if !exists('g:elevator#highlight')
+  g:elevator#highlight = ''
+endif
 
 var s_state = {
   scrolloff: -1,
@@ -65,6 +68,7 @@ export def Show(winid__a: number)
       minwidth: g:elevator#width,
       dragall: true,
       zindex: 1,
+      highlight: g:elevator#highlight,
     })
   endif
 
