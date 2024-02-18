@@ -7,6 +7,9 @@ endif
 if !exists('g:elevator#width')
   g:elevator#width = 1
 endif
+if !exists('g:elevator#highlight')
+  g:elevator#highlight = 'Pmenu'
+endif
 
 var s_state = {
   scrolloff: -1,
@@ -60,6 +63,7 @@ export def Show(winid__a: number)
     s_state.popup_id = popup_create('', {
       pos: 'topleft',
       minwidth: g:elevator#width,
+      highlight: g:elevator#highlight,
       dragall: true,
       zindex: 1,
     })

@@ -41,3 +41,11 @@ Example:
 >
     g:elevator#width = 2
 <
+
+*g:elevator#highlight*                Highlight group name.
+                                      Default value: "Pmenu"
+Example:
+>
+    highlight MyElevator guibg=#FF00FF
+    g:elevator#highlight = "MyElevator"
+<
