@@ -8,5 +8,5 @@ g:elevator_loaded = true
 import autoload 'elevator.vim'
 
 augroup Elevator
-  autocmd WinScrolled * elevator#Show(expand('<amatch>')->str2nr())
+  autocmd WinScrolled,BufEnter,WinEnter * elevator#Show(expand('<amatch>')->str2nr())
 augroup END
