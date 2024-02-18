@@ -9,10 +9,7 @@ Version:        0.2
 CONTENTS                                                     *elevator-contents*
 
     Intro...................................................|elevator-intro|
-    Mappings.............................................|elevator-mappings|
-    Mouse...................................................|elevator-mouse|
     Commands.............................................|elevator-commands|
-    Functions...........................................|elevator-functions|
     Variables...........................................|elevator-variables|
 
 ================================================================================
@@ -22,6 +19,11 @@ Elevator is a scollbar that utilizes VIM |popup| feature and works across both
 VIM and GVIM.
 
 Elevator works out of the box and does not require any configuration.
+
+================================================================================
+COMMANDS                                                     *elevator-commands*
+
+:ElevatorToggle                       Toggle scrollbar.
 
 ================================================================================
 VARIABLES                                                   *elevator-variables*

@@ -12,6 +12,7 @@ if !exists('g:elevator#highlight')
 endif
 
 var s_state = {
+  enabled: true,
   scrolloff: -1,
   screenrow: -1,
   topline: -1,
@@ -36,7 +37,23 @@ def S__calculate_scale(winid__a: number): float
   return 1.0 * winheight / (line('$', winid__a) + winheight)
 enddef
 
+export def Toggle()
+  s_state.enabled = !s_state.enabled
+
+  if !s_state.enabled
+    S__close()
+  else
+    Show(win_getid())
+  endif
+
+  echo 'Elevator ' .. (s_state.enabled ? 'enabled' : 'disabled')
+enddef
+
 export def Show(winid__a: number)
+  if !s_state.enabled
+    return
+  endif
+
   if s_state.dragging
     return
   endif
