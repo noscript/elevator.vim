@@ -78,7 +78,9 @@ enddef
 
 def S__restart_timer()
   S__stop_timer()
-  s_state.timer_id = timer_start(g:elevator#timeout_msec, (_) => S__close())
+  if g:elevator#timeout_msec > 0
+    s_state.timer_id = timer_start(g:elevator#timeout_msec, (_) => S__close())
+  endif
 enddef
 
 def S__close()
