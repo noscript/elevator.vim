@@ -27,7 +27,8 @@ Elevator works out of the box and does not require any configuration.
 VARIABLES                                                   *elevator-variables*
 
 *g:elevator#timeout_msec*             Timeout after which the scrollbar will
-                                      hide automatically.
+                                      hide automatically. Use 0 to always
+                                      show.
                                       Default value: 2000
 Example:
 >
