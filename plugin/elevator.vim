@@ -8,8 +8,9 @@ g:elevator_loaded = true
 import autoload 'elevator.vim'
 
 augroup Elevator
-  if exists('g:elevator#show_on_launch') && g:elevator#show_on_launch == v:true
-    autocmd BufEnter * elevator#Show(win_getid())
+  if exists('g:elevator#show_on_enter') && g:elevator#show_on_enter == v:true
+    autocmd BufWinEnter * elevator#Show(win_getid())
+    autocmd WinEnter * elevator#Show(win_getid())
   endif
   autocmd WinScrolled * elevator#Show(win_getid())
 augroup END

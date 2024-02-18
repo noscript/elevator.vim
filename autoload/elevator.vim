@@ -7,6 +7,9 @@ endif
 if !exists('g:elevator#width')
   g:elevator#width = 1
 endif
+if !exists('g:elevator#show_on_enter')
+  g:elevator#width = v:false
+endif
 
 var s_state = {
   scrolloff: -1,
