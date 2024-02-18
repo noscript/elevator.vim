@@ -14,6 +14,10 @@ if !exists('g:elevator#highlight')
   g:elevator#highlight = ''
 endif
 
+if !exists('g:elevator#hidden')
+  g:elevator#hidden = v:false
+endif
+
 var s_state = {
   scrolloff: -1,
   screenrow: -1,
@@ -39,8 +43,18 @@ def S__calculate_scale(winid__a: number): float
   return 1.0 * winheight / (line('$', winid__a) + winheight)
 enddef
 
+export def Toggle()
+  if g:elevator#hidden
+    g:elevator#hidden = v:false
+    Show(win_getid())
+  else
+    g:elevator#hidden = v:true
+    S__close()
+  endif
+enddef
+
 export def Show(winid__a: number)
-  if s_state.dragging
+  if s_state.dragging || g:elevator#hidden
     return
   endif
 
