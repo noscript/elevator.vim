@@ -14,6 +14,7 @@ CONTENTS                                                     *elevator-contents*
     Commands.............................................|elevator-commands|
     Functions...........................................|elevator-functions|
     Variables...........................................|elevator-variables|
+    Commands.............................................|elevator-commands|
 
 ================================================================================
 INTRO                                                           *elevator-intro*
