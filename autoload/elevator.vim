@@ -119,12 +119,7 @@ export def S__set_geometry()
   endif
 
   var popup_height = S__clamp((wininfo.height * scale)->round()->float2nr(), 1, wininfo.height)
-  var popup_offset = 0
-  if wininfo.botline == line('$', s_state.scrolled_winid)
-    popup_offset = wininfo.height - popup_height
-  else
-    popup_offset = S__clamp(((wininfo.topline - 1) * scale)->round()->float2nr(), 0, wininfo.height - popup_height)
-  endif
+  var popup_offset = S__clamp(((wininfo.topline - 1) * scale)->round()->float2nr(), 0, wininfo.height - popup_height)
 
   popup_setoptions(s_state.popup_id, {
     col: wininfo.wincol + wininfo.width - g:elevator#width,
