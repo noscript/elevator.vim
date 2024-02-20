@@ -42,14 +42,14 @@ Example:
     g:elevator#width = 2
 <
 
-*g:elevator#highlight*                Set the highlight group for the scroll bar
+*g:elevator#highlight*                Set the highlight group for the scroll bar.
                                       Default value: '' 
 Example:
 >
     g:elevator#highlight = 'PmenuThumb'
 <
 
-*g:elevator#hidden*                   Prevent scroll bar from appearing
+*g:elevator#hidden*                   Prevent scroll bar from appearing.
                                       Default value: v:false
 Example:
 >
@@ -57,7 +57,7 @@ Example:
 <
 
 *g:elevator#show_on_enter*            Switch to show the scroll bar automatically 
-                                      when entering a buffer
+                                      when entering a buffer.
                                       Default value: v:false
 Example:
 >
@@ -68,7 +68,7 @@ Example:
 ================================================================================
 COMMANDS                                                     *elevator-commands*
 
-*ElevatorToggle*                     Toggle the scroll bar on/ off
+*ElevatorToggle*                     Toggle the scroll bar on/ off.
 
 Example:
 >
