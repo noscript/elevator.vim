@@ -8,14 +8,14 @@ if !exists('g:elevator#width')
   g:elevator#width = 1
 endif
 if !exists('g:elevator#show_on_enter')
-  g:elevator#width = v:false
+  g:elevator#show_on_enter = false
 endif
 if !exists('g:elevator#highlight')
   g:elevator#highlight = ''
 endif
 
 if !exists('g:elevator#hidden')
-  g:elevator#hidden = v:false
+  g:elevator#hidden = false
 endif
 
 var s_state = {
@@ -45,12 +45,11 @@ enddef
 
 export def Toggle()
   if g:elevator#hidden
-    g:elevator#hidden = v:false
     Show(win_getid())
   else
-    g:elevator#hidden = v:true
     S__close()
   endif
+  g:elevator#hidden = !g:elevator#hidden
 enddef
 
 export def Show(winid__a: number)

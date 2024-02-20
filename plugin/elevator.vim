@@ -9,7 +9,7 @@ import autoload 'elevator.vim'
 
 augroup Elevator
 	autocmd!
-	if exists('g:elevator#show_on_enter') && g:elevator#show_on_enter == v:true
+	if exists('g:elevator#show_on_enter') && g:elevator#show_on_enter
 		autocmd BufWinEnter * elevator#Show(win_getid())
 		autocmd WinEnter * elevator#Show(win_getid())
 	endif
