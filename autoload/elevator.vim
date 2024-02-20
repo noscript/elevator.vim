@@ -7,6 +7,16 @@ endif
 if !exists('g:elevator#width')
   g:elevator#width = 1
 endif
+if !exists('g:elevator#show_on_enter')
+  g:elevator#show_on_enter = false
+endif
+if !exists('g:elevator#highlight')
+  g:elevator#highlight = ''
+endif
+
+if !exists('g:elevator#hidden')
+  g:elevator#hidden = false
+endif
 
 var s_state = {
   scrolloff: -1,
@@ -33,8 +43,17 @@ def S__calculate_scale(winid__a: number): float
   return 1.0 * winheight / (line('$', winid__a) + winheight)
 enddef
 
+export def Toggle()
+  if g:elevator#hidden
+    Show(win_getid())
+  else
+    S__close()
+  endif
+  g:elevator#hidden = !g:elevator#hidden
+enddef
+
 export def Show(winid__a: number)
-  if s_state.dragging
+  if s_state.dragging || g:elevator#hidden
     return
   endif
 
@@ -62,6 +81,7 @@ export def Show(winid__a: number)
       minwidth: g:elevator#width,
       dragall: true,
       zindex: 1,
+      highlight: g:elevator#highlight,
     })
   endif
 
@@ -78,7 +98,9 @@ enddef
 
 def S__restart_timer()
   S__stop_timer()
-  s_state.timer_id = timer_start(g:elevator#timeout_msec, (_) => S__close())
+  if g:elevator#timeout_msec > 0
+    s_state.timer_id = timer_start(g:elevator#timeout_msec, (_) => S__close())
+  endif
 enddef
 
 def S__close()
