@@ -42,7 +42,7 @@ def S__calculate_scale(winid__a: number): float
   var winheight = winheight(winid__a)
   var lines = line('$', winid__a)
   if lines < winheight 
-    return 1
+    return 1.0
   endif
   return 1.0 * winheight / (lines + winheight)
 enddef
