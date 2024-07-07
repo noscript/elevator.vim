@@ -38,9 +38,9 @@ def S__clamp(value__a: number, min__a: number, max__a: number): number
   endif
 enddef
 
-def S__calculate_scale(winid__a: number): float
-  var winheight = winheight(winid__a)
-  return 1.0 * winheight / (line('$', winid__a) + winheight)
+def S__calculate_scale(): float
+  var winheight = winheight(win_getid())
+  return 1.0 * winheight / (line('$', win_getid()) + winheight)
 enddef
 
 export def Toggle()
@@ -53,7 +53,7 @@ export def Toggle()
 enddef
 
 export def Show(winid__a: number)
-  if s_state.dragging || g:elevator#hidden
+  if g:elevator#hidden
     return
   endif
 
@@ -112,6 +112,7 @@ enddef
 export def S__set_geometry()
   var wininfo = getwininfo(s_state.scrolled_winid)[0]
   var scale = S__calculate_scale(s_state.scrolled_winid)
+  echomsg scale
   if scale >= 1.0
     S__close()
     return
@@ -126,37 +127,3 @@ export def S__set_geometry()
     minheight: popup_height,
   })
 enddef
-
-def S__on_mouse(event__a: string)
-  var mousepos = getmousepos()
-  if event__a == 'LeftMouse' && mousepos.winid == s_state.popup_id
-    s_state.screenrow = mousepos.screenrow
-    s_state.topline = line('w0')
-    s_state.dragging = true
-    s_state.scrolloff = &scrolloff
-    &scrolloff = 0
-    S__stop_timer()
-    win_gotoid(s_state.scrolled_winid)
-    popup_setoptions(s_state.popup_id, {dragall: false})
-  elseif event__a == 'LeftDrag' && s_state.dragging
-    var delta = mousepos.screenrow - s_state.screenrow
-    var savedview = winsaveview()
-    var scale = S__calculate_scale(s_state.scrolled_winid)
-    savedview.topline = S__clamp(s_state.topline + (delta / scale)->round()->float2nr(), 1, line('$'))
-    savedview.lnum = S__clamp(savedview.lnum, savedview.topline, savedview.topline + line('w$') - line('w0'))
-    winrestview(savedview)
-    S__set_geometry()
-  elseif event__a == 'LeftRelease' && s_state.dragging
-    s_state.dragging = false
-    s_state.screenrow = -1
-    s_state.topline = -1
-    &scrolloff = s_state.scrolloff
-    s_state.scrolloff = -1
-    S__restart_timer()
-    popup_setoptions(s_state.popup_id, {dragall: true})
-  endif
-enddef
-
-noremap <LeftDrag>       <LeftDrag><ScriptCmd>S__on_mouse('LeftDrag')<CR>
-noremap <LeftMouse>     <LeftMouse><ScriptCmd>S__on_mouse('LeftMouse')<CR>
-noremap <LeftRelease> <LeftRelease><ScriptCmd>S__on_mouse('LeftRelease')<CR>
