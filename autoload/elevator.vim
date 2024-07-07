@@ -40,7 +40,11 @@ enddef
 
 def S__calculate_scale(winid__a: number): float
   var winheight = winheight(winid__a)
-  return 1.0 * winheight / (line('$', winid__a) + winheight)
+  var lines = line('$', winid__a)
+  if lines < winheight 
+    return 1
+  endif
+  return 1.0 * winheight / (lines + winheight)
 enddef
 
 export def Toggle()
