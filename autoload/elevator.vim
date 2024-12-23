@@ -1,5 +1,8 @@
 vim9script noclear
 
+# hide elevator when a window is closed
+autocmd WinLeave * call S__close()
+
 # defaults:
 if !exists('g:elevator#timeout_msec')
   g:elevator#timeout_msec = 2000
